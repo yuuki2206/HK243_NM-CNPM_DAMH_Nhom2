@@ -1,4 +1,4 @@
-package CNPM;
+package CNPM2;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,10 +8,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class TaskDatabase {
+    private static final String DB_FILE_PATH = "tasks_database.json";
 
-    public static final String DB_FILE_PATH = "tasks_database.json";
-
-    public static JSONArray loadTasksFromDb() {
+    public static JSONArray loadTasks() {
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(DB_FILE_PATH)) {
             Object obj = parser.parse(reader);
@@ -24,9 +23,9 @@ public class TaskDatabase {
         return new JSONArray();
     }
 
-    public static void saveTasksToDb(JSONArray tasksData) {
+    public static void saveTasks(JSONArray tasks) {
         try (FileWriter file = new FileWriter(DB_FILE_PATH)) {
-            file.write(tasksData.toJSONString());
+            file.write(tasks.toJSONString());
             file.flush();
         } catch (IOException e) {
             System.err.println("Lỗi khi ghi vào file database: " + e.getMessage());
